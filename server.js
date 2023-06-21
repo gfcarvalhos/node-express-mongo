@@ -1,17 +1,6 @@
-const http = require('http')  //Importa o módulo nativo HTTP
-const port = 3000;            
+import app from './src/app.js'
+const port = process.env.PORT || 3000; //Boa pratica de identificar que a porta é o de ambiente de produção ou a fixa 3000           
 
-const rotas = {
-  '/': 'Curso de Node',
-  '/livros': 'Entrei na pag de livros',
-  '/autores': 'Listagem de autores'
-}
-
-const server = http.createServer((req, res) => {
-  res.writeHead(200, {'Content-Type': 'text/plain'})
-  res.end(rotas[req.url]); //envio final
-})
-
-server.listen(port, () => {
+app.listen(port, () => {
   console.log(`Servidor escutando em http://localhost:${port}`)
 })
