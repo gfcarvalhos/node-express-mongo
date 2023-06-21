@@ -17,9 +17,24 @@ app.get('/livros', (req, res) => {
   res.status(200).json(livros)
 })
 
+app.get('/livros/:id',(req, res) => {
+  let index = buscarLivro(req.params.id); //utiliza a funcao criada para encontrar o id dentro da lista
+  res.json(livros[index]); //devolve o array inteiro após a alteração
+})
+
 app.post('/livros', (req, res) => {
   livros.push(req.body);
   res.status(201).send('Livro cadastrado com sucesso')
 })
+
+app.put('/livros/:id',(req, res) => {
+  let index = buscarLivro(req.params.id); //utiliza a funcao criada para encontrar o id dentro da lista
+  livros[index].titulo = req.body.titulo; //altera o titulo do livro com o index encontrado
+  res.json(livros); //devolve o array inteiro após a alteração
+})
+
+function buscarLivro(id){
+  return livros.findIndex(livro => livro.id == id)
+}
 
 export default app
