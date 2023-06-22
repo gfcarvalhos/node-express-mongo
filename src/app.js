@@ -10,7 +10,7 @@ db.once("open", () => {
 
 const app = express(); //iniciando o express
 
-app.use(express.json()) //interpreta o chega via post e via put, transformando em obj e armazenando
+app.use(express.json()) //interpreta o que chega via post e via put, transformando em obj e armazenando
 
 routes(app);
 
@@ -23,10 +23,6 @@ app.get('/livros/:id',(req, res) => {
   res.json(livros[index]); //devolve o array inteiro após a alteração
 })
 
-app.post('/livros', (req, res) => {
-  livros.push(req.body);
-  res.status(201).send('Livro cadastrado com sucesso')
-})
 
 app.put('/livros/:id',(req, res) => {
   let index = buscarLivro(req.params.id); //utiliza a funcao criada para encontrar o id dentro da lista
